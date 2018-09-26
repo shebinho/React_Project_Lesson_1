@@ -1,0 +1,19 @@
+{
+    "name": "Hello-React",
+    "main": "index.js",
+    "scripts": {
+        "start": "browserify -t babelify --outfile public/generated-app.js src/hello.jsx && echo 'open localhost:8000' && nodemon --inspect ./index.js",
+        "watch": "watchify -v -t babelify --outfile public/generated-app.js src/hello.jsx"
+    },
+    "devDependencies": {
+        "babelify": "^6.3.0",
+        "browserify": "^11.2.0",
+        "watchify": "3.4.0"
+    },
+    "dependencies": {
+        "express": "^4.16.3",
+        "nodemon": "^1.18.4",
+        "react": "^0.14.3",
+        "react-dom": "^0.14.3"
+    }
+}
