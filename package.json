@@ -2,8 +2,8 @@
     "name": "Hello-React",
     "main": "index.js",
     "scripts": {
-        "start": "browserify -t babelify --outfile public/generated-app.js src/example1.jsx && echo 'open localhost:8000' && nodemon --inspect ./index.js",
-        "watch": "watchify -v -t babelify --outfile public/generated-app.js src/example1.jsx"
+        "start": "browserify -t babelify --outfile public/generated-app.js src/example2.jsx && echo 'open localhost:8000' && nodemon --inspect ./index.js",
+        "watch": "watchify -v -t babelify --outfile public/generated-app.js src/example2.jsx"
     },
     "devDependencies": {
         "babelify": "^6.3.0",

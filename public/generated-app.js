@@ -19148,119 +19148,92 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var Square = function Square(props) {
-    return _react2['default'].createElement(
-        'button',
-        { className: 'square', onClick: function () {
-                return props.onClick();
-            } },
-        props.value
-    );
-};
+var CustomTextInput = (function (_React$Component) {
+    _inherits(CustomTextInput, _React$Component);
 
-var Board = (function (_React$Component) {
-    _inherits(Board, _React$Component);
+    function CustomTextInput(props) {
+        var _this = this;
 
-    function Board(props) {
-        _classCallCheck(this, Board);
+        _classCallCheck(this, CustomTextInput);
 
-        _get(Object.getPrototypeOf(Board.prototype), 'constructor', this).call(this, props);
-        this.state = {
-            squares: Array(9).fill(null),
-            xIsNext: true
+        _get(Object.getPrototypeOf(CustomTextInput.prototype), 'constructor', this).call(this, props);
+
+        this.textInput = null;
+
+        this.setTextInputRef = function (element) {
+            _this.textInput = element;
+        };
+
+        this.focusTextInput = function () {
+            if (_this.textInput) _this.textInput.focus();
         };
     }
 
-    _createClass(Board, [{
-        key: 'handleClick',
-        value: function handleClick(i) {
-            var squares = this.state.squares.slice();
-            squares[i] = this.state.xIsNext ? "X" : "O";
-            this.setState({ squares: squares, xIsNext: !this.state.xIsNext });
-        }
-    }, {
-        key: 'renderSquere',
-        value: function renderSquere(i) {
-            var _this = this;
-
-            return _react2['default'].createElement(Square, { value: this.state.squares[i], onClick: function () {
-                    return _this.handleClick(i);
-                } });
+    _createClass(CustomTextInput, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.focusTextInput();
         }
     }, {
         key: 'render',
         value: function render() {
-            var status = 'Next player: ' + (this.state.xIsNext ? "X" : "O");
-
             return _react2['default'].createElement(
                 'div',
                 null,
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'status' },
-                    status
-                ),
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'board-row' },
-                    this.renderSquere(0),
-                    ' ',
-                    this.renderSquere(1),
-                    ' ',
-                    this.renderSquere(2)
-                ),
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'board-row' },
-                    this.renderSquere(3),
-                    ' ',
-                    this.renderSquere(4),
-                    ' ',
-                    this.renderSquere(5)
-                ),
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'board-row' },
-                    this.renderSquere(6),
-                    ' ',
-                    this.renderSquere(7),
-                    ' ',
-                    this.renderSquere(8)
-                )
+                _react2['default'].createElement('input', { type: 'text', ref: this.setTextInputRef }),
+                _react2['default'].createElement('input', { type: 'button', value: 'focus the text input', onClick: this.focusTextInput })
             );
         }
     }]);
 
-    return Board;
+    return CustomTextInput;
 })(_react2['default'].Component);
 
-var Game = (function (_React$Component2) {
-    _inherits(Game, _React$Component2);
+var MouseTracker = (function (_React$Component2) {
+    _inherits(MouseTracker, _React$Component2);
 
-    function Game() {
-        _classCallCheck(this, Game);
+    function MouseTracker(props) {
+        _classCallCheck(this, MouseTracker);
 
-        _get(Object.getPrototypeOf(Game.prototype), 'constructor', this).apply(this, arguments);
+        _get(Object.getPrototypeOf(MouseTracker.prototype), 'constructor', this).call(this, props);
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.state = { x: 0, y: 0 };
     }
 
-    _createClass(Game, [{
+    _createClass(MouseTracker, [{
+        key: 'handleMouseMove',
+        value: function handleMouseMove(event) {
+            this.setState({
+                x: event.clientX,
+                y: event.clientY
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                { className: 'game' },
+                { style: { height: "100" }, onMouseMove: this.handleMouseMove },
                 _react2['default'].createElement(
-                    'div',
-                    { className: 'game-board' },
-                    _react2['default'].createElement(Board, null)
+                    'h1',
+                    null,
+                    'Mouse move around the screen'
+                ),
+                _react2['default'].createElement(
+                    'p',
+                    null,
+                    'Current mouse position is ',
+                    this.state.x,
+                    ', ',
+                    this.state.y
                 )
             );
         }
     }]);
 
-    return Game;
+    return MouseTracker;
 })(_react2['default'].Component);
 
-_reactDom2['default'].render(_react2['default'].createElement(Game, null), document.getElementById("app"));
+_reactDom2['default'].render(_react2['default'].createElement(CustomTextInput, null), document.getElementById("app"));
 
 },{"react":158,"react-dom":29}]},{},[159]);
